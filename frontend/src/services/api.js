@@ -9,7 +9,6 @@ export const chatWithAssistant = async (message) => {
 };
 
 export const getBookRecommendations = async (message) => {
-  console.log({ "message": message })
   const response = await axios.post(`${API_BASE_URL}/books/recommendations`, { "message": message });
   return response.data;
 };

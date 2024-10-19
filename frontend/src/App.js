@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Chat from './components/Chat';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import PromotionBanner from './components/PromotionBanner';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { AppBar, Toolbar, Typography, IconButton, Badge } from '@mui/material';
@@ -23,6 +24,7 @@ function App() {
         {({ cartItems }) => (
           <Router>
             <div>
+              <PromotionBanner />
               <AppBar position="static">
                 <Toolbar>
                   <IconButton edge="start" color="inherit" aria-label="home" component={Link} to="/">

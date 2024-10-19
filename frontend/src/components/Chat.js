@@ -2,7 +2,6 @@
 import React, { useState, useContext } from 'react';
 import { getBookRecommendations } from '../services/api';
 import { CartContext } from '../context/CartContext';
-import { toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
 
 import {
@@ -48,15 +47,19 @@ const Chat = () => {
       }
     } catch (error) {
       console.error('Error fetching recommendations:', error);
-      toast.error('An error occurred while fetching recommendations.');
     } finally {
       setLoading(false);
     }
   };
 
   const handleAddToCart = (book) => {
-    addToCart(book);
-    toast.success(`${book.title} has been added to your cart.`);
+    addToCart({
+      id: book.id,
+      title: book.title,
+      authors: book.authors,
+      price: 15,
+      quantity: 1, // Default quantity
+    });
   };
 
   return (
