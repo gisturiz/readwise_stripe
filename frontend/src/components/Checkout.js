@@ -42,7 +42,7 @@ const Checkout = () => {
 
   const createPaymentIntent = async (promoCode) => {
     try {
-      const response = await axios.post('http://localhost:3000/api/payment/create-payment-intent', {
+      const response = await axios.post('https://readwise-8dc6a7dcfdc3.herokuapp.com/api/payment/create-payment-intent', {
         items: cartItems,
         promotionCode: promoCode || null,
       });
