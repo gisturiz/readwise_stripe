@@ -16,6 +16,7 @@ const PromotionBanner = () => {
         color: 'primary.contrastText',
         textAlign: 'center',
         position: 'relative',
+        borderRadius: 1,
         py: 1,
       }}
     >
@@ -24,7 +25,7 @@ const PromotionBanner = () => {
       </Typography>
       <IconButton
         onClick={() => setVisible(false)}
-        sx={{ position: 'absolute', right: 8, top: 4, color: 'inherit' }}
+        sx={{ position: 'absolute', right: 8, top: 0, color: 'inherit' }}
       >
         <CloseIcon />
       </IconButton>
