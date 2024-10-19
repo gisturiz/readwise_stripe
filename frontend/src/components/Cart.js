@@ -1,6 +1,21 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import {
+  Container,
+  Typography,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  IconButton,
+  Button,
+  Divider,
+  Box,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
 const Cart = () => {
   const { cartItems, removeFromCart } = useContext(CartContext);
@@ -8,26 +23,57 @@ const Cart = () => {
   const totalAmount = cartItems.length * 15; // $15 per book
 
   return (
-    <div>
-      <h2>Your Cart</h2>
-      {cartItems.length === 0 && <p>No items in cart.</p>}
-      {cartItems.map((book, index) => (
-        <div key={index} className="cart-item">
-          <h4>{book.title}</h4>
-          <p>By: {book.authors.join(', ')}</p>
-          <p>Price: $15.00</p>
-          <button onClick={() => removeFromCart(book.id)}>Remove</button>
-        </div>
-      ))}
-      {cartItems.length > 0 && (
-        <div>
-          <h3>Total: ${totalAmount.toFixed(2)}</h3>
-          <Link to="/checkout">
-            <button>Proceed to Checkout</button>
-          </Link>
-        </div>
+    <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        Your Cart
+      </Typography>
+      {cartItems.length === 0 ? (
+        <Typography variant="body1">No items in cart.</Typography>
+      ) : (
+        <Box>
+          <List>
+            {cartItems.map((book, index) => (
+              <div key={index}>
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar
+                      variant="square"
+                      src={book.thumbnail}
+                      alt={book.title}
+                      sx={{ width: 56, height: 56 }}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={book.title}
+                    secondary={`By: ${book.authors.join(', ')}`}
+                  />
+                  <Typography variant="body1" sx={{ mr: 2 }}>
+                    Price: $15.00
+                  </Typography>
+                  <IconButton edge="end" onClick={() => removeFromCart(book.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItem>
+                <Divider />
+              </div>
+            ))}
+          </List>
+          <Box sx={{ mt: 2, textAlign: 'right' }}>
+            <Typography variant="h6">Total: ${totalAmount.toFixed(2)}</Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="/checkout"
+              startIcon={<ShoppingCartCheckoutIcon />}
+              sx={{ mt: 2 }}
+            >
+              Proceed to Checkout
+            </Button>
+          </Box>
+        </Box>
       )}
-    </div>
+    </Container>
   );
 };
 

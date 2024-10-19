@@ -56,14 +56,6 @@
   margin-bottom: 20px;
 }
 
-.chat-input-form {
-  position: sticky;
-  top: 0;
-  background-color: #fff; /* Match the background color of your app */
-  z-index: 1000;
-  padding-top: 10px;
-}
-
 .chat-input-form button {
   padding: 10px 20px;
   font-size: 16px;
