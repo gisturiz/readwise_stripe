@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { getBookRecommendations } from '../services/api';
 import { CartContext } from '../context/CartContext';
 import { ClipLoader } from 'react-spinners';
-
+import { AutoFixHigh as AIWandIcon } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -64,16 +64,22 @@ const Chat = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        Welcome to ReadWise
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 3 }}>
+        Describe the kind of books you're interested in, and we'll recommend titles you'll love.
+      </Typography>
       <Box component="form" onSubmit={handleSend} sx={{ display: 'flex', mb: 2 }}>
         <TextField
           variant="outlined"
           fullWidth
-          placeholder="Type your message..."
+          placeholder="I'm looking for mystery novels set in Victorian England."
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
         <Button variant="contained" type="submit" sx={{ ml: 1 }}>
-          Send
+          <AIWandIcon />
         </Button>
       </Box>
 
