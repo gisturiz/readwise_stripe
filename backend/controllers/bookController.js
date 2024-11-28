@@ -1,6 +1,5 @@
 // controllers/bookController.js
 const openai = require('../utils/openaiClient');
-//const { safeJsonParse, generateSearchQuery } = require('../utils/helpers');
 const axios = require('axios');
 
 async function getBookRecommendations(req, res) {
@@ -9,7 +8,8 @@ async function getBookRecommendations(req, res) {
     try {
         // Step 1: Extract Preferences
         const prompt = `
-            As an expert in literature, analyze the following user message and extract the main genres, themes, and settings. Ensure the response is in valid JSON format with keys "genres", "themes", and "settings". Only include information explicitly mentioned.
+            As an expert in literature, you're task is to take a user's message and provide recommendations of potential books they may be interested in. Analyze the user's message and determine the subject which may best fit the types of books they may be interested in. Ensure the response is formated as a URL parameter beginning with subject: and the subject you recommend. For example, 
+            If the user's message is, "I'd like to read books on Victorian fiction", your response should be formatted: victorian+subject:fiction, where the search terms should come first and be separated by a + sign, and the subject shoud come last followed by a :
 
             User Message:
 "${userMessage}"
@@ -22,6 +22,8 @@ async function getBookRecommendations(req, res) {
         });
 
         const extractedData = completion.choices[0].message.content;
+
+        console.log(extractedData)
 
         // Step 2: Search Google Books API
         const apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${extractedData}&maxResults=5&key=${process.env.GOOGLE_BOOKS_API_KEY}`;

@@ -8,8 +8,11 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:3001', // Update this with your frontend URL
-  }));
+  origin: [
+    'http://localhost:3001',
+    'https://readwise-stripe-5f5wf0cr4-gustavo-isturizs-projects.vercel.app',
+    'https://readwise-stripe.vercel.app'] // Update this with your frontend URL
+}));
 app.use(express.json());
 
 // Routes
